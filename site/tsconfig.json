@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "../",
+    "paths": {
+      "@kui/*": ["components/*"]
+    }
+  },
+  "include": [
+    "./components/**/*",
+    "./pages/**/*",
+    "./index.tsx"
+  ]
+} 
