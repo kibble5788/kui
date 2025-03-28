@@ -1,4 +1,13 @@
 import './style/index.less';
 
-export { default as Button } from './button';
-export type { ButtonProps, ButtonType, ButtonSize, ButtonHTMLType } from './button'; 
+import Button from './button';
+
+export { Button };
+export type { ButtonProps, ButtonType, ButtonSize, ButtonHTMLType } from './button';
+
+// 添加默认导出
+const KUI = {
+  Button
+};
+
+export default KUI; 

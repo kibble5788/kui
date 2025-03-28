@@ -182,6 +182,7 @@ exec('npx tsc -p tsconfig.json', (err) => {
       library: {
         name: 'kui',
         type: 'umd',
+        export: 'default',
       },
       globalObject: 'this',
     },
