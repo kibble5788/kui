@@ -1,6 +1,6 @@
 {
   "name": "@ked3/kui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "一个现代化的React UI组件库",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -9,12 +9,13 @@
     "es/",
     "lib/",
     "hooks/",
+    "package.json",
     "README.md"
   ],
   "scripts": {
     "start": "node ./scripts/dev.js",
     "build": "node ./scripts/build.js",
-    "build:site": "node ./scripts/build-site.js",
+    "build:site": "rm -rf ./site/dist && node ./scripts/build-site.js",
     "test": "jest",
     "lint": "eslint 'components/**/*.{js,jsx,ts,tsx}'",
     "deploy": "node ./scripts/deploy.js"
@@ -54,6 +55,7 @@
     "less": "^4.2.2",
     "less-loader": "^12.2.0",
     "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.14",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.2",
     "webpack": "^5.98.0",

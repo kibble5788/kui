@@ -2,36 +2,36 @@ const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 const { exec } = require('child_process');
+const TerserPlugin = require('terser-webpack-plugin');
+const distDir = path.resolve(__dirname, '../site/dist');
+const publicDir = path.resolve(__dirname, '../site/public');
 
-// 确保dist目录存在
-const distDir = path.resolve(__dirname, '../dist');
+// 确保目录存在
 if (!fs.existsSync(distDir)) {
-  fs.mkdirSync(distDir);
+  fs.mkdirSync(distDir, { recursive: true });
 }
-
-// 创建public目录和index.html
-const publicDir = path.resolve(__dirname, '../public');
 if (!fs.existsSync(publicDir)) {
-  fs.mkdirSync(publicDir);
+  fs.mkdirSync(publicDir, { recursive: true });
 }
 
 // 创建index.html文件
-const indexHtmlContent = `<!DOCTYPE html>
+const indexHtmlContent = `
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KUI 组件库</title>
   <meta name="description" content="一个现代化的React UI组件库，提供优雅、简洁的设计体验">
-  <link rel="stylesheet" href="./index.css">
 </head>
 <body>
   <div id="root"></div>
-  <script src="./index.js"></script>
+  <script src="./bundle.js"></script>
 </body>
 </html>`;
 
-fs.writeFileSync(path.resolve(publicDir, 'index.html'), indexHtmlContent);
+// 将 index.html 写入到 dist 目录
+fs.writeFileSync(path.resolve(distDir, 'index.html'), indexHtmlContent);
 
 console.log('正在构建静态网站...');
 webpack({
@@ -41,6 +41,14 @@ webpack({
     path: distDir,
     filename: 'bundle.js',
     publicPath: './'
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+    ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
@@ -56,33 +64,34 @@ webpack({
         test: /\.less$/,
         use: [
           'style-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]--[hash:base64:5]'
+              }
+            }
+          },
           'less-loader',
         ],
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]--[hash:base64:5]'
+              }
+            }
+          }
+        ],
       },
     ],
   },
-  plugins: [
-    // 复制public目录中的文件到dist目录
-    {
-      apply: (compiler) => {
-        compiler.hooks.afterEmit.tap('CopyPublicPlugin', () => {
-          if (fs.existsSync(path.resolve(__dirname, '../public'))) {
-            fs.readdirSync(path.resolve(__dirname, '../public')).forEach(file => {
-              fs.copyFileSync(
-                path.resolve(__dirname, '../public', file),
-                path.resolve(distDir, file)
-              );
-            });
-          }
-        });
-      }
-    }
-  ]
+  plugins: []
 }, (err, stats) => {
   if (err || stats.hasErrors()) {
     console.error('构建失败:', err || stats.toString({

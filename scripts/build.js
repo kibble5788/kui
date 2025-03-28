@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 const { exec } = require('child_process');
+const TerserPlugin = require('terser-webpack-plugin');
 
 // 确保输出目录存在
 const dirs = ['lib', 'es'];
@@ -34,6 +35,14 @@ exec('tsc -p tsconfig.json', (err) => {
         type: 'umd',
       },
       globalObject: 'this',
+    },
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          extractComments: false,
+        }),
+      ],
     },
     externals: {
       react: {

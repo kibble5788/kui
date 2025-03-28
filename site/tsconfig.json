@@ -4,11 +4,13 @@
     "baseUrl": "../",
     "paths": {
        
-    }
+    },
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
   "include": [
     "./components/**/*",
     "./pages/**/*",
-    "./index.tsx"
+    "./index.tsx",
+    "./types/**/*"
   ]
 } 

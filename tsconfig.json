@@ -18,6 +18,6 @@
     
     }
   },
-  "include": ["components/**/*", "hooks/**/*"],
+  "include": ["components/**/*", "hooks/**/*", "site/**/*", "types/**/*"],
   "exclude": ["node_modules", "lib", "es"]
 } 

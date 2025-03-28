@@ -22,12 +22,14 @@
   color: rgba(0, 0, 0, 0.85);
   background-color: #fff;
   border-color: #d9d9d9;
+  outline: none;
   
-  &:focus,
+ 
   &:hover {
     color: @primary-color;
     background-color: #fff;
     border-color: @primary-color;
+    outline: none;
   }
   
   &:active {
@@ -41,7 +43,6 @@
     opacity: 0.6;
     
     &:hover,
-    &:focus,
     &:active {
       color: rgba(0, 0, 0, 0.85);
       background-color: #fff;
@@ -55,7 +56,6 @@
     background-color: @primary-color;
     border-color: @primary-color;
     
-    &:focus,
     &:hover {
       color: #fff;
       background-color: lighten(@primary-color, 10%);
@@ -70,7 +70,6 @@
     
     &[disabled] {
       &:hover,
-      &:focus,
       &:active {
         color: #fff;
         background-color: @primary-color;
@@ -84,7 +83,6 @@
     background-color: @error-color;
     border-color: @error-color;
     
-    &:focus,
     &:hover {
       color: #fff;
       background-color: lighten(@error-color, 10%);
@@ -99,7 +97,6 @@
     
     &[disabled] {
       &:hover,
-      &:focus,
       &:active {
         color: #fff;
         background-color: @error-color;
@@ -131,7 +128,6 @@
     box-shadow: none;
     
     &:hover,
-    &:focus,
     &:active {
       color: lighten(@primary-color, 10%);
       background: transparent;
@@ -144,7 +140,6 @@
       border-color: transparent;
       
       &:hover,
-      &:focus,
       &:active {
         color: rgba(0, 0, 0, 0.25);
         background: transparent;

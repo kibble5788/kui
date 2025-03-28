@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import ButtonDemo from './components/ButtonDemo';
 
 // 导入文档组件
-import Home from './pages/Home';
+import Home from './pages/home';
 import GettingStarted from './pages/GettingStarted';
 import ComponentsOverview from './pages/ComponentsOverview';
 

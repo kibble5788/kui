@@ -10,10 +10,7 @@ const compiler = webpack({
     filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
-    alias: {
-      '@kui': path.resolve(__dirname, '../'),
-    },
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.json']
   },
   module: {
     rules: [
