@@ -1,4 +1,5 @@
-import './style/index.less';
+// 不再直接导入样式
+// import './style/index.less';
 
 import Button from './button/index';
 

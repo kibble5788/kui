@@ -19,6 +19,72 @@ npm install @ked3/kui
 yarn add @ked3/kui
 ```
 
+## 使用方法
+
+### 基本使用
+
+```jsx
+import { Button } from '@ked3/kui';
+
+// 仅在客户端导入样式
+import '@ked3/kui/style';
+
+const App = () => {
+  return (
+    <div>
+      <Button>按钮</Button>
+    </div>
+  );
+};
+
+export default App;
+```
+
+### 按需导入（推荐）
+
+```jsx
+import Button from '@ked3/kui/button';
+
+// 仅在客户端导入样式
+import '@ked3/kui/button/style';
+
+const App = () => {
+  return (
+    <div>
+      <Button>按钮</Button>
+    </div>
+  );
+};
+
+export default App;
+```
+
+### 在服务端渲染(SSR)环境中使用
+
+在SSR环境中，由于服务器无法处理CSS/Less文件，请确保只在客户端导入样式：
+
+```jsx
+import { Button } from '@ked3/kui';
+
+// 客户端组件中
+const ClientComponent = () => {
+  // 仅在客户端导入样式
+  if (typeof window !== 'undefined') {
+    require('@ked3/kui/style');
+  }
+  
+  return <Button>按钮</Button>;
+};
+
+// 或者使用动态导入
+import dynamic from 'next/dynamic';
+
+const ClientComponent = dynamic(
+  () => import('../components/ClientComponent'),
+  { ssr: false }
+);
+```
+
 ## 快速开始
 
 ```jsx
