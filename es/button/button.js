@@ -21,7 +21,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import React from 'react';
-import { useClassName, cls } from '../hooks';
+import { useClassName, cls } from '../hooks/index.js';
 var Button = function (props) {
     var _a;
     var _b = props.type, type = _b === void 0 ? 'default' : _b, _c = props.size, size = _c === void 0 ? 'medium' : _c, _d = props.disabled, disabled = _d === void 0 ? false : _d, _e = props.htmlType, htmlType = _e === void 0 ? 'button' : _e, onClick = props.onClick, className = props.className, style = props.style, children = props.children, rest = __rest(props, ["type", "size", "disabled", "htmlType", "onClick", "className", "style", "children"]);

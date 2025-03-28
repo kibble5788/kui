@@ -1,4 +1,4 @@
-import Button from './button';
+import Button from './button.js';
 import './style/index.less';
 export default Button;
 //# sourceMappingURL=index.js.map

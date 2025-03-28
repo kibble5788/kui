@@ -1,5 +1,5 @@
 import './style/index.less';
-import Button from './button';
+import Button from './button/index.js';
 export { Button };
 // 添加默认导出
 var KUI = {

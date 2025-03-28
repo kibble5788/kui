@@ -144,8 +144,32 @@ function updateImportPaths(dir) {
       // 替换相对导入路径
       // ../hooks => ../hooks (保持不变，因为hooks已经在根目录)
       // ../../hooks => ../hooks (减少一层目录)
-      // ./interface => ./interface (保持不变)
-      content = content.replace(/from\s+['"]\.\.\/\.\.\/hooks['"]/g, 'from \'../hooks\'');
+      content = content.replace(/from\s+['"]\.\.\/\.\.\/hooks['"]/g, 'from \'../hooks/index.js\'');
+      
+      // 修复目录导入为文件导入
+      content = content.replace(/from\s+['"](\.\.\/[\w-]+)['"](?!\/)(?!\.js)/g, 'from \'$1/index.js\'');
+      content = content.replace(/from\s+['"](\.\/[\w-]+)['"](?!\/)(?!\.js)/g, 'from \'$1/index.js\'');
+      
+      // 特殊处理：修复同级目录下的导入
+      if (content.includes('from \'./button/index.js\'')) {
+        content = content.replace(/from\s+['"]\.\/button\/index\.js['"]/g, 'from \'./button.js\'');
+      }
+      
+      // 清除可能的重复.js后缀
+      content = content.replace(/\.js\.js/g, '.js');
+      
+      // 确保所有js导入都有.js后缀
+      content = content.replace(/from\s+['"]([^'"]+)['"](?!\.js|\.ts|\.less)/g, function(match, p1) {
+        // 如果是相对路径且不是样式文件
+        if ((p1.startsWith('./') || p1.startsWith('../')) && 
+            !p1.endsWith('.css') && !p1.endsWith('.less')) {
+          return `from '${p1}.js'`;
+        }
+        return match;
+      });
+      
+      // 再次清除可能的重复.js后缀
+      content = content.replace(/\.js\.js/g, '.js');
       
       fs.writeFileSync(filePath, content);
     }
@@ -185,6 +209,9 @@ exec('npx tsc -p tsconfig.json', (err) => {
         export: 'default',
       },
       globalObject: 'this',
+    },
+    experiments: {
+      outputModule: true,
     },
     optimization: {
       minimize: true,

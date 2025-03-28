@@ -1,6 +1,6 @@
 {
   "name": "@ked3/kui",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "一个现代化的React UI组件库",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -18,7 +18,9 @@
       "import": "./es/button/index.js",
       "require": "./lib/button/index.js",
       "types": "./es/button/index.d.ts"
-    }
+    },
+    "./es/button": "./es/button/index.js",
+    "./lib/button": "./lib/button/index.js"
   },
   "files": [
     "es/",
