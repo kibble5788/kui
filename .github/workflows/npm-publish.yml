@@ -21,17 +21,13 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+          cache: 'npm'
 
       - name: install
         run: npm install
       - name: build
         run: npm run build
 
-      - name: setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
       - run: npm publish --access=public  
         env:
           NODE_AUTH_TOKEN: ${{secrets.KED3_BOT_NPM_TOKEN}}
