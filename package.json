@@ -1,6 +1,6 @@
 {
   "name": "@ked3/kui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "一个现代化的React UI组件库",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -29,6 +29,7 @@
     "components"
   ],
   "author": "",
+  "homepage": "https://arco.design",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",

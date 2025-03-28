@@ -13,11 +13,12 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "es",
+    "rootDir": ".",
     "baseUrl": ".",
     "paths": {
     
     }
   },
-  "include": ["components/**/*", "hooks/**/*", "site/**/*", "types/**/*"],
-  "exclude": ["node_modules", "lib", "es"]
+  "include": ["components/**/*", "hooks/**/*", "types/**/*"],
+  "exclude": ["node_modules", "lib", "es", "site/**/*"]
 } 
