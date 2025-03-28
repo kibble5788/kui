@@ -44,9 +44,6 @@ webpack({
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
-    alias: {
-      '@kui': path.resolve(__dirname, '../components'),
-    },
   },
   module: {
     rules: [

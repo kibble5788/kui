@@ -1,6 +1,5 @@
 import React from 'react';
-// 使用相对路径导入，后续可以改为别名导入：import { Button } from '@kui/button';
-import { Button } from '@kui/button';
+import { Button } from '../../components/index';
 
 const ButtonDemo: React.FC = () => {
   return (

@@ -12,7 +12,7 @@ const compiler = webpack({
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
     alias: {
-      '@kui': path.resolve(__dirname, '../components'),
+      '@kui': path.resolve(__dirname, '../'),
     },
   },
   module: {

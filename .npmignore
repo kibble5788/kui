@@ -1,0 +1,15 @@
+# 源代码目录
+components/
+site/
+tests/
+
+# 开发和构建相关
+scripts/
+.git/
+.gitignore
+tsconfig.json
+
+# 其他不需要发布的文件
+node_modules/
+*.log
+.DS_Store 

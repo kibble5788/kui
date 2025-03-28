@@ -5,6 +5,12 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "es/index.d.ts",
+  "files": [
+    "es/",
+    "lib/",
+    "hooks/",
+    "README.md"
+  ],
   "scripts": {
     "start": "node ./scripts/dev.js",
     "build": "node ./scripts/build.js",
@@ -58,6 +64,7 @@
     "url": "https://github.com/kibble5788/http-client.git"
   },
   "volta": {
-    "node": "18.12.0"
+    "node": "18.12.0",
+    "yarn": "4.7.0"
   }
 }
