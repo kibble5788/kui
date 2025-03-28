@@ -47,7 +47,7 @@ function moveFiles(sourceDir, targetDir) {
       
       // 递归调用完成后删除目录
       if (fs.existsSync(sourcePath) && fs.readdirSync(sourcePath).length === 0) {
-        fs.rmdirSync(sourcePath);
+        fs.rmSync(sourcePath, { recursive: true });
       }
     } else {
       // 检查目标文件是否已存在
@@ -164,6 +164,9 @@ exec('npx tsc -p tsconfig.json', (err) => {
   
   // 处理编译结果
   processCompileResult();
+  
+  // 复制样式文件
+  copyStyleFiles();
   
   // 设置编译完成标志
   typescriptCompiled = true;
@@ -282,5 +285,109 @@ function validateEsDirectory() {
     console.log('验证通过: button组件已成功移动到es根目录');
   } else {
     console.error('警告: 未找到button组件目录');
+  }
+
+  // 检查style目录是否存在
+  if (fs.existsSync(path.join(esDir, 'style'))) {
+    console.log('验证通过: style目录已成功复制到es根目录');
+  } else {
+    console.error('警告: 未找到style目录，正在复制...');
+    copyStyleFiles();
+  }
+}
+
+// 复制样式文件的函数
+function copyStyleFiles() {
+  console.log('正在复制样式文件...');
+  const sourceStyleDir = path.resolve(__dirname, '../components/style');
+  const targetStyleDir = path.resolve(__dirname, '../es/style');
+  
+  // 复制组件根目录下的style文件夹
+  if (fs.existsSync(sourceStyleDir)) {
+    // 确保目标目录存在
+    if (!fs.existsSync(targetStyleDir)) {
+      fs.mkdirSync(targetStyleDir, { recursive: true });
+    }
+    
+    // 复制文件
+    fs.readdirSync(sourceStyleDir).forEach(file => {
+      const sourcePath = path.join(sourceStyleDir, file);
+      const targetPath = path.join(targetStyleDir, file);
+      
+      if (fs.statSync(sourcePath).isDirectory()) {
+        // 递归复制子目录
+        copyDirRecursive(sourcePath, targetPath);
+      } else {
+        fs.copyFileSync(sourcePath, targetPath);
+      }
+    });
+    
+    console.log('成功复制根style目录');
+  }
+  
+  // 查找并复制组件子目录中的style文件夹
+  const componentsDir = path.resolve(__dirname, '../components');
+  fs.readdirSync(componentsDir).forEach(component => {
+    const componentPath = path.join(componentsDir, component);
+    
+    // 跳过非目录和style目录本身
+    if (!fs.statSync(componentPath).isDirectory() || component === 'style') {
+      return;
+    }
+    
+    const componentStyleDir = path.join(componentPath, 'style');
+    if (fs.existsSync(componentStyleDir)) {
+      const targetComponentDir = path.join(path.resolve(__dirname, '../es'), component);
+      const targetComponentStyleDir = path.join(targetComponentDir, 'style');
+      
+      // 确保目标组件目录存在
+      if (!fs.existsSync(targetComponentDir)) {
+        fs.mkdirSync(targetComponentDir, { recursive: true });
+      }
+      
+      // 确保目标组件style目录存在
+      if (!fs.existsSync(targetComponentStyleDir)) {
+        fs.mkdirSync(targetComponentStyleDir, { recursive: true });
+      }
+      
+      // 复制文件
+      fs.readdirSync(componentStyleDir).forEach(file => {
+        const sourcePath = path.join(componentStyleDir, file);
+        const targetPath = path.join(targetComponentStyleDir, file);
+        
+        if (fs.statSync(sourcePath).isDirectory()) {
+          // 递归复制子目录
+          copyDirRecursive(sourcePath, targetPath);
+        } else {
+          fs.copyFileSync(sourcePath, targetPath);
+        }
+      });
+      
+      console.log(`成功复制 ${component}/style 目录`);
+    }
+  });
+}
+
+// 递归复制目录的辅助函数
+function copyDirRecursive(src, dest) {
+  // 创建目标目录
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest, { recursive: true });
+  }
+  
+  // 复制目录内容
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    
+    if (entry.isDirectory()) {
+      // 递归复制子目录
+      copyDirRecursive(srcPath, destPath);
+    } else {
+      // 复制文件
+      fs.copyFileSync(srcPath, destPath);
+    }
   }
 } 

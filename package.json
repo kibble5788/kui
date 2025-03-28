@@ -1,6 +1,6 @@
 {
   "name": "@ked3/kui",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "一个现代化的React UI组件库",
   "main": "lib/index.js",
   "module": "es/index.js",

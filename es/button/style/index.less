@@ -1,0 +1,150 @@
+@import '../../style/index.less';
+
+@button-prefix-cls: ~'@{kui-prefix}-button';
+
+.@{button-prefix-cls} {
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  cursor: pointer;
+  transition: all @animation-duration-base;
+  user-select: none;
+  touch-action: manipulation;
+  height: 32px;
+  padding: 0 @spacing-medium;
+  font-size: @font-size-base;
+  border-radius: @border-radius-base;
+  color: rgba(0, 0, 0, 0.85);
+  background-color: #fff;
+  border-color: #d9d9d9;
+  outline: none;
+  
+ 
+  &:hover {
+    color: @primary-color;
+    background-color: #fff;
+    border-color: @primary-color;
+    outline: none;
+  }
+  
+  &:active {
+    color: darken(@primary-color, 10%);
+    background-color: #fff;
+    border-color: darken(@primary-color, 10%);
+  }
+  
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+    
+    &:hover,
+    &:active {
+      color: rgba(0, 0, 0, 0.85);
+      background-color: #fff;
+      border-color: #d9d9d9;
+    }
+  }
+  
+  // 类型
+  &-primary {
+    color: #fff;
+    background-color: @primary-color;
+    border-color: @primary-color;
+    
+    &:hover {
+      color: #fff;
+      background-color: lighten(@primary-color, 10%);
+      border-color: lighten(@primary-color, 10%);
+    }
+    
+    &:active {
+      color: #fff;
+      background-color: darken(@primary-color, 10%);
+      border-color: darken(@primary-color, 10%);
+    }
+    
+    &[disabled] {
+      &:hover,
+      &:active {
+        color: #fff;
+        background-color: @primary-color;
+        border-color: @primary-color;
+      }
+    }
+  }
+  
+  &-danger {
+    color: #fff;
+    background-color: @error-color;
+    border-color: @error-color;
+    
+    &:hover {
+      color: #fff;
+      background-color: lighten(@error-color, 10%);
+      border-color: lighten(@error-color, 10%);
+    }
+    
+    &:active {
+      color: #fff;
+      background-color: darken(@error-color, 10%);
+      border-color: darken(@error-color, 10%);
+    }
+    
+    &[disabled] {
+      &:hover,
+      &:active {
+        color: #fff;
+        background-color: @error-color;
+        border-color: @error-color;
+      }
+    }
+  }
+  
+  // 大小
+  &-large {
+    height: 40px;
+    padding: 0 @spacing-large;
+    font-size: @font-size-lg;
+    border-radius: @border-radius-base;
+  }
+  
+  &-small {
+    height: 24px;
+    padding: 0 @spacing-small;
+    font-size: @font-size-sm;
+    border-radius: @border-radius-sm;
+  }
+  
+  // 链接按钮
+  &-link {
+    color: @primary-color;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    
+    &:hover,
+    &:active {
+      color: lighten(@primary-color, 10%);
+      background: transparent;
+      border-color: transparent;
+    }
+    
+    &[disabled] {
+      color: rgba(0, 0, 0, 0.25);
+      background: transparent;
+      border-color: transparent;
+      
+      &:hover,
+      &:active {
+        color: rgba(0, 0, 0, 0.25);
+        background: transparent;
+        border-color: transparent;
+      }
+    }
+  }
+} 
